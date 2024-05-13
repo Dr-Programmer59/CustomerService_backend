@@ -7,14 +7,11 @@ const crypto=require("crypto")
 
 exports.registerUser=AsyncErrorHandler(async(req,res)=>{
     console.log("in register ",req.body)
-    const {name,email,password,category,role}=req.body;
+    const {name,email,password,category,role,profileImage}=req.body;
 
     const user= await User.create({
-        name,email,password,category,role,
-        avatar:{
-            public_id:"this is sample id",
-            url:"User profiel url"
-        }
+        profileImage,name,email,password,category,role
+       
     })
     console.log("someone is trying to register ",user)
     if(!user){

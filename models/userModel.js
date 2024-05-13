@@ -5,6 +5,11 @@ const jwt=require("jsonwebtoken")
 const crypto=require("crypto")
 
 const userSchema=mongoose.Schema({
+    profileImage:{
+        type:String, 
+        required:true,
+    },
+
     name:{
         type:String, 
         required:[true,"Please Enter your name"],
@@ -23,17 +28,17 @@ const userSchema=mongoose.Schema({
         minLength:[8,"Password should be more then 8 characters."],
         select:false,
     },
-    avatar:{
-        public_id:{
-            type:String,
-            required:true,
-        },
-        url:{
-            type:String,
-            required:true,
-        }
+    // avatar:{
+    //     public_id:{
+    //         type:String,
+    //         required:true,
+    //     },
+    //     url:{
+    //         type:String,
+    //         required:true,
+    //     }
 
-    },
+    // },
     category:{
         type:String,
         default:"none",
