@@ -18,15 +18,25 @@ exports.getAlluserMessages=AsyncErrorHandler(async (req,res,next)=>{
         }
     )
 })
+exports.getuserMessage=AsyncErrorHandler(async (req,res,next)=>{
+    console.log("in me")
+    
+    const message=await userMessages.findById(req.params.id);
+    res.status(200).json(
+        {
+            sucess:true,
+            message,
+        }
+    )
+})
 
 
 exports.createuserMessages=AsyncErrorHandler(async(req,res)=>{
   
-    const {employeeId}=req.body;
+  
 
     const userMessage= await userMessages.create({
-        employeeId,customers:new Map([
-        ])
+        _id:req.params.id,customers:{}
     })
    
     if(!userMessage){
@@ -41,13 +51,25 @@ exports.createuserMessages=AsyncErrorHandler(async(req,res)=>{
 
 exports.updateuserMessages=AsyncErrorHandler(async(req,res,next)=>{
 
-    const newuserMessagesData={
-        name:req.body.name,
-        description:req.body.description
-    };
-    const userMessages=await userMessages.findByIdAndUpdate(req.params.id,newuserMessagesData);
-    if(!userMessages){
-        console.log("something goes wrong")
+    try {
+        const {customerId,customerName,message}=req.body;
+
+        const employee = await userMessages.findById(req.params.id);
+        
+        if (!employee) {
+            console.log('Employee not found');
+            return null;
+        }
+        console.log("trying to updating")
+        await employee.addMessageToCustomer(customerId,customerName, message);
+        // Check if customer ID exists in the customers object
+     
+        // Save the updated employee document
+     
+        
+    } catch (error) {
+        console.error('Error updating customer messages:', error);
+        throw error;
     }
     res.status(200).json({
         sucess:true,

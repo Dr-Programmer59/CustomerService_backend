@@ -73,7 +73,7 @@ const io = new Server(server, {
         console.log("returing true")
         let required_employee=working_employees[person.category].find(employee=>employee.socketId==availableEmployee.socketId)
 
-        io.to(availableEmployee.socketId).emit("new-customer",{customerIndex:required_employee.customers.length-1,socketId:person.socketId})
+        io.to(availableEmployee.socketId).emit("new-customer",{name:person.name,socketId:person.socketId})
         return true; // Task assigned successfully
     } else {
         return false; // No available employees to take on the task
@@ -101,7 +101,7 @@ console.log("max are ",maxCustomers)
         busy_customer[person.socketId]={category:person.category,talkingwith:employee.socketId}
         let required_employee=working_employees[person.category].find(employee=>employee.socketId==employee.socketId)
         console.log("working sending ",employee.socketId)
-        io.to(employee.socketId).emit("new-customer",{customerIndex:required_employee.customers.length-1,socketId:person.socketId})
+        io.to(employee.socketId).emit("new-customer",{name:person.name,socketId:person.socketId})
 
         return ; // Customers assigned successfully
 
@@ -118,7 +118,7 @@ console.log("max are ",maxCustomers)
     busy_customer[person.socketId]={category:person.category,talkingwith:employeeWithMinCustomers.socketId}
     let required_employee=working_employees[person.category].find(employee=>employee.socketId==employeeWithMinCustomers.socketId)
 
-        io.to(employeeWithMinCustomers.socketId).emit("new-customer",{customerIndex:required_employee.customers.length-1,socketId:person.socketId})
+        io.to(employeeWithMinCustomers.socketId).emit("new-customer",{name:person.name,socketId:person.socketId})
 
     return;
     }

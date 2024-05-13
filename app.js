@@ -19,6 +19,8 @@ const user=require("./routes/userRoute")
 const category=require("./routes/categoryRoutes")
 const audioR=require("./routes/audioRoutes.js")
 const accountR=require("./routes/accountRoutes.js")
+const mesasgeR=require("./routes/userMessagesRoutes.js")
+
 
 //middler ware for error
 
@@ -27,6 +29,8 @@ app.use("/api/v1",user)
 app.use("/api/v1",category)
 app.use("/api/v1",audioR)
 app.use("/api/v1",accountR)
+app.use("/api/v1",mesasgeR)
+
 
 
 app.use(errorMiddleware)

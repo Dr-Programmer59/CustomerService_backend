@@ -23,7 +23,8 @@ exports.registerUser=AsyncErrorHandler(async(req,res)=>{
     }
     res.status(200).json({
         sucess:true,
-        msg:"User Created Scuessfully!"
+        msg:"User Created Scuessfully!",
+        user
     })
 })
 exports.loginUser=AsyncErrorHandler(async(req,res,next)=>{
