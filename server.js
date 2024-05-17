@@ -158,6 +158,9 @@ console.log("max are ",maxCustomers)
     // Listen for messages from the client
     socket.on('send-msg', (msgData) => {
         if(msgData.role=="customer"){
+            if (!busy_customer[msgData.socketId]){
+                return
+            }
             let empSocket=busy_customer[msgData.socketId].talkingwith;
             console.log("employee socket id is ",empSocket)
             msgData['socketId']=socket.id

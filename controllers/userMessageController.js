@@ -20,7 +20,7 @@ exports.getAlluserMessages=AsyncErrorHandler(async (req,res,next)=>{
 })
 exports.getuserMessage=AsyncErrorHandler(async (req,res,next)=>{
     console.log("in me")
-    
+   
     const message=await userMessages.findById(req.params.id);
     res.status(200).json(
         {
