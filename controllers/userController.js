@@ -144,14 +144,17 @@ exports.updatePassword=AsyncErrorHandler(async(req,res,next)=>{
 })
 
 exports.updateProfile=AsyncErrorHandler(async(req,res,next)=>{
+    console.log("in update profile")
     const newUserdata={
         name:req.body.name,
-        email:req.body.email
+     
+        category:req.body.category
     };
     const user=await User.findByIdAndUpdate(req.user.id,newUserdata);
     if(!user){
         console.log("something goes wrong")
     }
+    console.log("sucessfully done")
     res.status(200).json({
         sucess:true,
     
@@ -168,10 +171,12 @@ exports.getAlluser=AsyncErrorHandler(async(req,res,next)=>{
     )
 })
 exports.getSingleuser=AsyncErrorHandler(async(req,res,next)=>{
+    
     const user=await User.findById(req.params.id);
     if(!user){
         return next(new ErrorHandler(`User not exists with Id:${req.params.id}`,404))
     }
+    console.log("yser")
     res.status(200).json(
         {
             sucess:true,

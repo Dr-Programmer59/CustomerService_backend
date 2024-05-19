@@ -9,10 +9,14 @@ router.route("/logout").get(logoutUser);
 router.route("/forgot").post(forgotPassword);
 router.route("/resetPassword/:token").put(resetPassword)
 router.route("/me").get(isAuthenticatedUser,getUserDetail);
-router.route("/me/update").post(isAuthenticatedUser,updateProfile);
+// router.route("/me/update").post(isAuthenticatedUser,updateProfile);/
 
 router.route("/me/update/password").put(isAuthenticatedUser,updatePassword)
 router.route("/admin/users").get(getAlluser)
-router.route("/admin/user/:id").get(isAuthenticatedUser,isAuthorizeRole("admin"),getSingleuser).put(isAuthenticatedUser,isAuthorizeRole("admin"),updateUserRole).delete(isAuthenticatedUser,isAuthorizeRole("admin"),deleteUser)
+router.route("/admin/user/:id")
+.get(isAuthenticatedUser,isAuthorizeRole("admin"),getSingleuser)
+.put(isAuthenticatedUser,isAuthorizeRole("admin"),updateUserRole)
+.delete(isAuthenticatedUser,isAuthorizeRole("admin"),deleteUser)
+.post(isAuthenticatedUser,isAuthorizeRole("admin"),updateProfile);
 
 module.exports=router;
