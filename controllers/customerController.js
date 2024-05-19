@@ -21,8 +21,9 @@ exports.getAllCustomer=AsyncErrorHandler(async (req,res,next)=>{
 
 exports.getCustomer = AsyncErrorHandler(async (req, res, next) => {
     console.log("in me");
-    const { phone } = req.body;
 
+    const { phone } = req.body;
+    console.log(phone)
     // Find the customer document by phone number
     const customer = await Customer.findOne({ phone }).select("+messages");
 
