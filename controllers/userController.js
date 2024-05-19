@@ -150,7 +150,7 @@ exports.updateProfile=AsyncErrorHandler(async(req,res,next)=>{
      
         category:req.body.category
     };
-    const user=await User.findByIdAndUpdate(req.user.id,newUserdata);
+    const user=await User.findByIdAndUpdate(req.params.id,newUserdata);
     if(!user){
         console.log("something goes wrong")
     }
